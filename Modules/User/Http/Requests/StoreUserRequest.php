@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\User\Http\Requests\Admin;
+namespace Modules\User\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -29,7 +29,9 @@ class StoreUserRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email'],
-//            'role' => ['required', 'boolean'],
+            'role_id' => ['required', 'exists:roles,id'],
+            'password' => ['required'],
+            'password_confirmation' => ['required'],
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\User\Http\Requests\Admin;
+namespace Modules\User\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,11 +26,10 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstName' => ['required', 'string', 'max:255'],
-            'lastName' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email'],
-            'mobile' => ['required','digits:11'],
-            'role' => ['required', 'boolean'],
+            'role_id' => ['required', 'boolean','exists:roles,id'],
         ];
     }
 

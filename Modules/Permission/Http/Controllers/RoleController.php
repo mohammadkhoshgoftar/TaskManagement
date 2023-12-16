@@ -26,10 +26,10 @@ class RoleController extends Controller
     {
         $result = $this->repository->storeToDb($request->validated());
         if ($result) {
-            $message='کاربر با موفقیت ثبت نام شد';
+            $message='نفش با موفقیت ثبت نام شد';
             return Response::success($message);
         } else {
-            $message = 'ثبت نام کاربر با خطا روبه رو شد';
+            $message = 'ایجاد نفش با خطا روبه رو شد';
             return Response::error($message);
         }
     }

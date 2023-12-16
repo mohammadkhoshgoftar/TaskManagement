@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInit8d56beacc8d687855c8a76e3430427b7
 {
     public static $prefixLengthsPsr4 = array (
-        'M' => 
+        'M' =>
         array (
             'Modules\\User\\' => 13,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Modules\\User\\' => 
+        'Modules\\User\\' =>
         array (
             0 => __DIR__ . '/../..' . '/',
         ),
@@ -25,8 +25,8 @@ class ComposerStaticInit8d56beacc8d687855c8a76e3430427b7
         'Modules\\User\\Database\\Seeders\\UserDatabaseSeeder' => __DIR__ . '/../..' . '/Database/Seeders/UserDatabaseSeeder.php',
         'Modules\\User\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/Http/Controllers/UserController.php',
         'Modules\\User\\Http\\Controllers\\admin\\UserController' => __DIR__ . '/../..' . '/Http/Controllers/admin/UserController.php',
-        'Modules\\User\\Http\\Requests\\Admin\\StoreUserRequest' => __DIR__ . '/../..' . '/Http/Requests/Admin/StoreUserRequest.php',
-        'Modules\\User\\Http\\Requests\\Admin\\UpdateUserRequest' => __DIR__ . '/../..' . '/Http/Requests/Admin/UpdateUserRequest.php',
+        'Modules\\User\\Http\\Requests\\StoreUserRequest' => __DIR__ . '/../..' . '/Http/Requests/Admin/StoreUserRequest.php',
+        'Modules\\User\\Http\\Requests\\UpdateUserRequest' => __DIR__ . '/../..' . '/Http/Requests/Admin/UpdateUserRequest.php',
         'Modules\\User\\Http\\Resources\\UserCollection' => __DIR__ . '/../..' . '/Http/Resources/UserCollection.php',
         'Modules\\User\\Http\\Resources\\UserResource' => __DIR__ . '/../..' . '/Http/Resources/UserResource.php',
         'Modules\\User\\Interface\\UserRepositoryInterface' => __DIR__ . '/../..' . '/Interface/UserRepositoryInterface.php',

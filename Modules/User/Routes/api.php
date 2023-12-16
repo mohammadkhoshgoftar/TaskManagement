@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Modules\User\Http\Controllers\admin\UserController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
