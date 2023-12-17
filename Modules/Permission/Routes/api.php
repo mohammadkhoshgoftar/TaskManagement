@@ -14,10 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/permission', function (Request $request) {
-    return $request->user();
-});
-
 Route::/*middleware('auth:api')
     ->*/prefix('roles')
     ->group(function () {
@@ -26,6 +22,18 @@ Route::/*middleware('auth:api')
             Route::post('/store', 'store');
             Route::get('/show/{id}', 'show');
             Route::post('/update/{id}', 'update');
+            Route::delete('/delete/{id}', 'destroy');
+        });
+    });
+
+Route::/*middleware('auth:api')
+    ->*/prefix('permission')
+    ->group(function () {
+        Route::controller(PermissionController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/store', 'store');
+            Route::get('/show/{id}', 'show');
+            Route::get('/update', 'update');
             Route::delete('/delete/{id}', 'destroy');
         });
     });

@@ -111,7 +111,7 @@ class TaskServiceProvider extends ServiceProvider
         return $paths;
     }
 
-    public function registerHelper(): void
+    private function registerHelper(): void
     {
         require __DIR__.'/../Helpers/'.$this->moduleNameLower.'_helper.php';
     }

@@ -5,6 +5,7 @@ namespace Modules\Task\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
 
 class UpdateTaskRequest extends FormRequest
 {
@@ -56,10 +57,7 @@ class UpdateTaskRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'success' => false,
-            'message' => 'Validation errors',
-            'data' => $validator->errors()
-        ]));
+        $message = 'Validation errors';
+        throw Response::error($message, $validator->errors());
     }
 }

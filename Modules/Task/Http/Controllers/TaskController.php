@@ -55,6 +55,13 @@ class TaskController extends Controller
 
     public function destroy($id)
     {
-        return $this->repository->deleteToDb($id);
+        $result = $this->repository->deleteToDb($id);
+        if ($result){
+            $message = 'تسک با موفقیت حذف شد';
+            return Response::success($message);
+        }else{
+            $message = 'حذف تست با خطا روبه رو شد';
+            return Response::error($message);
+        }
     }
 }

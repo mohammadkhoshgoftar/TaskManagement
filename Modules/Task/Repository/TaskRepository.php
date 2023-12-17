@@ -22,10 +22,9 @@ class TaskRepository implements TaskRepositoryInterface
         try {
             $model = $this->model->with(['user'])->orderByDesc('id')->paginate(Request()->per_page <= 30 ? Request()->per_page : 30);
             return new TaskCollection($model);
-//            return Response::success(data:$userCollection);
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
-            Response::error($message);
+            return Response::error($message);
         }
     }
 
@@ -55,28 +54,25 @@ class TaskRepository implements TaskRepositoryInterface
         try {
             $model = $this->model->findOrFail($id);
             $taskResource = new TaskResource($model);
-            return Response::success(data:$taskResource);
+            return Response::success(data: $taskResource);
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             return Response::error($message);
         }
     }
 
-    public function deleteToDb($id)
+    public function deleteToDb($id): bool
     {
         try {
             $model = $this->model->find($id);
             if ($model) {
                 $model->delete();
-                $message = 'تسک با موفقیت حذف شد';
-                return Response::success($message);
-            }else{
-                $message = 'این تسک وجود ندارد';
-                return Response::error($message);
+                return true;
+            } else {
+                return false;
             }
         } catch (\Exception $exception) {
-            $message = $exception->getMessage();
-            return Response::error($message);
+            return false;
         }
 
     }

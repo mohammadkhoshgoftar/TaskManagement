@@ -28,6 +28,7 @@ class PermissionServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        $this->registerHelper();
     }
 
     /**
@@ -108,5 +109,10 @@ class PermissionServiceProvider extends ServiceProvider
             }
         }
         return $paths;
+    }
+
+    private function registerHelper(): void
+    {
+        require __DIR__.'/../Helpers/'.$this->moduleNameLower.'_helper.php';
     }
 }

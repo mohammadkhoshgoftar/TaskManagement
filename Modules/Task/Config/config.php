@@ -1,5 +1,12 @@
 <?php
 
 return [
-    'name' => 'Task'
+    'name' => 'Task',
+
+    'permissions' => [
+        'index-task',
+        'store-task',
+        'update-task',
+        'delete-task',
+    ],
 ];

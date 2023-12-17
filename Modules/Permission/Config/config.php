@@ -1,5 +1,12 @@
 <?php
 
 return [
-    'name' => 'Permission'
+    'name' => 'Permission',
+
+    'permissions' => [
+        'index-role',
+        'store-role',
+        'update-role',
+        'delete-role',
+    ],
 ];
