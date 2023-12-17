@@ -47,7 +47,8 @@ class UserController extends Controller
             return Response::success($message);
         } else {
             $message = 'به روزررسانی اطلاعات کاربر با خطا روبه رو شد';
-            return Response::error($message);        }
+            return Response::error($message);
+        }
     }
 
     public function destroy($id)

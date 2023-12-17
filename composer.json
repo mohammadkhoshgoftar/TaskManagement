@@ -8,12 +8,13 @@
         "php": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "hekmatinasser/verta": "^8.3",
         "laravel/framework": "^8.75",
+        "laravel/passport": "^10",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "nwidart/laravel-modules": "8.0",
-        "spatie/laravel-permission": "^6.2",
-        "laravel/passport": "^10"
+        "spatie/laravel-permission": "^6.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

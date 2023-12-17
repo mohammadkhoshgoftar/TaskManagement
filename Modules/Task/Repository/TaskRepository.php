@@ -1,28 +1,27 @@
 <?php
 
-namespace Modules\User\Repository;
+namespace Modules\Task\Repository;
 
-use Modules\User\Interface\UserRepositoryInterface;
-use Modules\User\Http\Resources\UserCollection;
-use Modules\User\Http\Resources\UserResource;
-use Spatie\Permission\Models\Role;
+use Modules\Task\Interface\TaskRepositoryInterface;
+use Modules\Task\Http\Resources\TaskCollection;
+use Modules\Task\Http\Resources\TaskResource;
+use Modules\Task\Models\Task;
 use Illuminate\Http\Response;
-use App\Models\User;
 
-class UserRepository implements UserRepositoryInterface
+class TaskRepository implements TaskRepositoryInterface
 {
-    private User $model;
+    private Task $model;
 
     public function __construct()
     {
-        $this->model = new User();
+        $this->model = new Task();
     }
 
     public function index()
     {
         try {
-            $model = $this->model->orderByDesc('id')->paginate(Request()->per_page <= 30 ? Request()->per_page : 30);
-            return new UserCollection($model);
+            $model = $this->model->with(['user'])->orderByDesc('id')->paginate(Request()->per_page <= 30 ? Request()->per_page : 30);
+            return new TaskCollection($model);
 //            return Response::success(data:$userCollection);
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -30,27 +29,21 @@ class UserRepository implements UserRepositoryInterface
         }
     }
 
-    public function storeToDb($validatedData)
+    public function storeToDb($validatedData): bool
     {
         try {
-            $role = Role::query()->find($validatedData['role_id']);
-            unset($validatedData['role_id']);
             $model = $this->model->create($validatedData);
-            $model->assignRole($role);
             return true;
         } catch (\Exception $exception) {
             return false;
         }
     }
 
-    public function updateToDb($validatedData, $id)
+    public function updateToDb($validatedData, $id): bool
     {
         try {
             $model = $this->model->find($id);
-            foreach ($validatedData as $key => $item) {
-                $model->{$key} = $item;
-            }
-            $model->save();
+            $model->update($validatedData);
             return true;
         } catch (\Exception $exception) {
             return false;
@@ -61,8 +54,8 @@ class UserRepository implements UserRepositoryInterface
     {
         try {
             $model = $this->model->findOrFail($id);
-            $userResource = new UserResource($model);
-            return Response::success(data:$userResource);
+            $taskResource = new TaskResource($model);
+            return Response::success(data:$taskResource);
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
             return Response::error($message);
@@ -75,10 +68,10 @@ class UserRepository implements UserRepositoryInterface
             $model = $this->model->find($id);
             if ($model) {
                 $model->delete();
-                $message = 'کاربر با موفقیت حذف شد';
+                $message = 'تسک با موفقیت حذف شد';
                 return Response::success($message);
             }else{
-                $message = 'این کاربر وجود ندارد';
+                $message = 'این تسک وجود ندارد';
                 return Response::error($message);
             }
         } catch (\Exception $exception) {

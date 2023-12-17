@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 /*
@@ -13,6 +14,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/task', function (Request $request) {
-    return $request->user();
+Route::prefix('task')->group(function () {
+    Route::controller(TaskController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::post('/store', 'store');
+        Route::get('/show/{id}', 'show');
+        Route::post('/update/{id}', 'update');
+        Route::delete('/delete/{id}', 'destroy');
+    });
 });
