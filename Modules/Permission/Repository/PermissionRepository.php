@@ -6,6 +6,7 @@ use Modules\Permission\Interface\PermissionRepositoryInterface;
 use Modules\Permission\Http\Resources\PermissionCollection;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Response;
+use Spatie\Permission\Models\Role;
 
 class PermissionRepository implements PermissionRepositoryInterface
 {
@@ -27,7 +28,7 @@ class PermissionRepository implements PermissionRepositoryInterface
         }
     }
 
-    public function updateToDb()
+    public function updateToDb(): bool
     {
         try {
             foreach (getModulesName() as $module) {
@@ -44,6 +45,20 @@ class PermissionRepository implements PermissionRepositoryInterface
             }
             return true;
         } catch (\Exception $exception) {
+            return false;
+        }
+    }
+
+    public function sync($validateData):bool
+    {
+        try {
+            $role = Role::query()->find($validateData['role_id']);
+            $permissionModels  = Permission::query()->whereIn('id',$validateData['permissions'])->get();
+
+            $role->syncPermissions($permissionModels);
+            return true;
+        }catch (\Exception $exception){
+            dd($exception);
             return false;
         }
     }

@@ -31,9 +31,8 @@ Route::/*middleware('auth:api')
     ->group(function () {
         Route::controller(PermissionController::class)->group(function () {
             Route::get('/', 'index');
-            Route::post('/store', 'store');
-            Route::get('/show/{id}', 'show');
             Route::get('/update', 'update');
-            Route::delete('/delete/{id}', 'destroy');
+            Route::post('/sync', 'assignPermissionsToRole');
+
         });
     });

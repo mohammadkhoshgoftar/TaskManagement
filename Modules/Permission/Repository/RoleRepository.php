@@ -44,6 +44,7 @@ class RoleRepository implements RollRepositoryInterface
             foreach ($validatedData as $key => $item) {
                 $model->{$key} = $item;
             }
+            $model->guard_name = 'api';
             $model->save();
             return true;
         } catch (\Exception $exception) {
