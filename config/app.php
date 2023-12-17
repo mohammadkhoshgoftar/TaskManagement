@@ -179,6 +179,7 @@ return [
 
         Modules\Auth\Providers\AuthServiceProvider::class,
         Modules\User\Providers\UserServiceProvider::class,
+        Modules\Task\Providers\TaskServiceProvider::class,
 
     ],
 
