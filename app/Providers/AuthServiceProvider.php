@@ -29,5 +29,9 @@ class AuthServiceProvider extends ServiceProvider
         if (! $this->app->routesAreCached()) {
             Passport::routes();
         }
+
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole('superAdmin') ? true : null;
+        });
     }
 }

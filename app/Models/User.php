@@ -25,7 +25,6 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -44,6 +43,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function before(User $user, string $ability): bool|null
+    {
+        if ($user->hasRole('superAdmin')) {
+            return true;
+        }
+
+        return null; // see the note above in Gate::before about why null must be returned here.
+    }
 
     public function setPasswordAttribute($password)
     {

@@ -58,7 +58,6 @@ class PermissionRepository implements PermissionRepositoryInterface
             $role->syncPermissions($permissionModels);
             return true;
         }catch (\Exception $exception){
-            dd($exception);
             return false;
         }
     }

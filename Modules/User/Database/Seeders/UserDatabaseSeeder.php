@@ -21,7 +21,10 @@ class UserDatabaseSeeder extends Seeder
             'first_name' => 'mohammad',
             'last_name'  => 'Khosh',
             'email' => 'mohammadkhoshgoftar5850@gmail.com',
-            'password' => hash::make(12345),
+            'password' => 12345,
         ]);
+        $user  = User::query()->find(1);
+        $user->assignRole('superAdmin');
+
     }
 }
