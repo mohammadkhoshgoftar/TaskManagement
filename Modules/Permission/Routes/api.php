@@ -14,25 +14,25 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::/*middleware('auth:api')
-    ->*/prefix('roles')
+Route::prefix('roles')
+    ->middleware('check.api.auth')
     ->group(function () {
         Route::controller(RoleController::class)->group(function () {
-            Route::get('/', 'index');
-            Route::post('/store', 'store');
-            Route::get('/show/{id}', 'show');
-            Route::post('/update/{id}', 'update');
-            Route::delete('/delete/{id}', 'destroy');
+            Route::get('/', 'index')->middleware(['can:index-role']);
+            Route::post('/store', 'store')->middleware(['can:store-role']);
+            Route::get('/show/{id}', 'show')->middleware(['can:index-role']);
+            Route::post('/update/{id}', 'update')->middleware(['can:update-role']);
+            Route::delete('/delete/{id}', 'destroy')->middleware(['can:delete-role']);
         });
     });
 
-Route::/*middleware('auth:api')
-    ->*/prefix('permission')
+Route::prefix('permission')
+    ->middleware('check.api.auth')
     ->group(function () {
         Route::controller(PermissionController::class)->group(function () {
-            Route::get('/', 'index');
-            Route::get('/update', 'update');
-            Route::post('/sync', 'assignPermissionsToRole');
+            Route::get('/', 'index')->middleware(['can:index-permission']);
+            Route::get('/update', 'update')->middleware(['can:update-permission']);
+            Route::post('/sync', 'assignPermissionsToRole')->middleware(['can:assign-permissions-to-role']);
 
         });
     });

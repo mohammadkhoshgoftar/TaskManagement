@@ -14,12 +14,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::prefix('task')->group(function () {
-    Route::controller(TaskController::class)->group(function () {
-        Route::get('/', 'index')->middleware(['can:index-task']);
-        Route::post('/store', 'store')->middleware(['can:store-task']);
-        Route::get('/show/{id}', 'show')->middleware(['can:index-task']);
-        Route::post('/update/{id}', 'update')->middleware(['can:update-task']);
-        Route::delete('/delete/{id}', 'destroy')->middleware(['can:delete-task']);
+Route::prefix('task')
+    ->middleware('check.api.auth')
+    ->group(function () {
+        Route::controller(TaskController::class)->group(function () {
+            Route::get('/', 'index')->middleware(['can:index-task']);
+            Route::post('/store', 'store')->middleware(['can:store-task']);
+            Route::get('/show/{id}', 'show')->middleware(['can:index-task']);
+            Route::post('/update/{id}', 'update')->middleware(['can:update-task']);
+            Route::delete('/delete/{id}', 'destroy')->middleware(['can:delete-task']);
+        });
     });
-});

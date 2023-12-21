@@ -15,15 +15,17 @@ use Illuminate\Http\Request;
 */
 
 
-Route::prefix('user')->group(function () {
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/', 'index');
-        Route::post('/store', 'store');
-        Route::get('/show/{id}', 'show');
-        Route::post('/update/{id}', 'update');
-        Route::delete('/delete/{id}', 'destroy');
+Route::prefix('user')
+    ->middleware('check.api.auth')
+    ->group(function () {
+        Route::controller(UserController::class)->group(function () {
+            Route::get('/', 'index')->middleware(['can:index-user']);
+            Route::post('/store', 'store')->middleware(['can:store-user']);
+            Route::get('/show/{id}', 'show')->middleware(['can:index-user']);
+            Route::post('/update/{id}', 'update')->middleware(['can:update-user']);
+            Route::delete('/delete/{id}', 'destroy')->middleware(['can:delete-user']);
+        });
     });
-});
 
 
 
