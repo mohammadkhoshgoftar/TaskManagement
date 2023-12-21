@@ -2,15 +2,12 @@
 
 namespace Modules\Category\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
+use Modules\Category\Http\Requests\UpdateCategoryRequest;
 use Modules\Category\Http\Requests\StoreCategoryRequest;
 use Modules\Category\Repository\CategoryRepository;
-use Modules\Task\Http\Requests\FilterTaskRequest;
-use Modules\Task\Http\Requests\UpdateTaskRequest;
+use Illuminate\Routing\Controller;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
@@ -44,14 +41,14 @@ class CategoryController extends Controller
         return $this->repository->show($id);
     }
 
-    public function update(UpdateTaskRequest $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
         $result = $this->repository->updateToDb($request->validated(), $id);
         if ($result) {
-            $message = 'اطلاعات تسک با موفقیت به روزرسانی شد';
+            $message = 'اطلاعات دسته بندی  با موفقیت به روزرسانی شد';
             return Response::success($message);
         } else {
-            $message = 'به روزررسانی تسک با خطا روبه رو شد';
+            $message = 'به روزررسانی دسته بندی  با خطا روبه رو شد';
             return Response::error($message);
         }
     }

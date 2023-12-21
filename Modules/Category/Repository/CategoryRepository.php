@@ -20,7 +20,6 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function index()
     {
         try {
-
             $model = $this->model->paginate(Request()->per_page <= 30 ? Request()->per_page : 30);
             return new CategoryCollection($model);
         } catch (\Exception $exception) {
