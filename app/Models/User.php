@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
-use Modules\Category\Models\Category;
-use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles ,\OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.
@@ -45,9 +44,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function category(){
-        return $this->belongsTo(Category::class);
-    }
 
     public function before(User $user, string $ability): bool|null
     {

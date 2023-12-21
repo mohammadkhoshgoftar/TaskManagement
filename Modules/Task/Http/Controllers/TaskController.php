@@ -4,18 +4,17 @@ namespace Modules\Task\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Modules\Task\Http\Requests\FilterTaskRequest;
+use Modules\Task\Http\Requests\StoreTaskRequest;
 use Modules\Task\Http\Requests\UpdateTaskRequest;
-use Modules\Task\Http\Requests\StoreCategoryRequest;
 use Illuminate\Routing\Controller;
-use Illuminate\Http\Request;
-use Modules\Task\Repository\CategoryRepository;
+use Modules\Task\Repository\TaskRepository;
 
 class TaskController extends Controller
 {
 
     private $repository;
 
-    public function __construct(CategoryRepository $taskRepository)
+    public function __construct(TaskRepository $taskRepository)
     {
         $this->repository = $taskRepository;
     }
@@ -25,7 +24,7 @@ class TaskController extends Controller
         return $this->repository->index($request->validated());
     }
 
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreTaskRequest $request)
     {
         $result = $this->repository->storeToDb($request->validated());
         if ($result) {

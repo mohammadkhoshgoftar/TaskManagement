@@ -33,6 +33,8 @@ class UpdateTaskRequest extends FormRequest
             'order'         => ['required', 'integer'],
             'status'        => ['required', 'string', 'max:255'],
             'deadline'      => ['required', 'string'],
+            'category_id' => ['nullable', 'exists:categories,id'],
+
         ];
     }
 
@@ -52,6 +54,8 @@ class UpdateTaskRequest extends FormRequest
             'status.max' => 'تعداد کاراکتر وضعیت تسک حداکثر 255 کاراکتر باشد',
             'deadline.required' => 'زمان انجام فیلدی اجباری است',
             'deadline.string' => 'زمان انجام باید متن باشد است',
+            'category_id.exists' => 'دسته بندی وجود ندارد',
+
         ];
     }
 

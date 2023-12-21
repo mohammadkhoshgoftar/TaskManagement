@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\User;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Category extends Model
+class Category extends Model implements Auditable
 {
-    use HasApiTokens, HasFactory, SoftDeletes;
+    use HasApiTokens, HasFactory, SoftDeletes , \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.

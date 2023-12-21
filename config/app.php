@@ -163,7 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
-//        OwenIt\Auditing\AuditingServiceProvider::class,
+        OwenIt\Auditing\AuditingServiceProvider::class,
 
         /*
          * Package Service Providers...

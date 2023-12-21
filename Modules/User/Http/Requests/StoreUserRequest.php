@@ -44,8 +44,11 @@ class StoreUserRequest extends FormRequest
             'last_name.required' => 'نام خانوادگی فیلد اجباری است',
             'last_name.string' => 'نام خانوادگی  باید متن باشد',
             'last_name.max' => 'تعداد کاراکتر نام حانوادگی حداکثر 255 کاراکتر باشد',
-//            'role.boolean' => 'فیلد نقش باید مقدار 0 یا 1 داشته باشد',
-        ];
+            'role_id.required' => 'نقش اجباری است',
+            'role_id.exists' => 'نقش وجود ندارد',
+            'password.required' => 'رمز عبور اجاری است',
+            'password_confirmation.required' => 'تکرار رمز عبور اجباری است',
+            ];
     }
 
     public function failedValidation(Validator $validator)

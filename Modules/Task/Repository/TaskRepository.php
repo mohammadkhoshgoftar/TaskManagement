@@ -25,7 +25,7 @@ class TaskRepository implements TaskRepositoryInterface
             $search = $validatedData['search'] ?? null;
             $searchBy = $validatedData['searchBy'] ?? null;
             $data = $this->filter($orderBy, $orderType, $search, $searchBy);
-            $model = $data->paginate(Request()->per_page <= 30 ? Request()->per_page : 30);
+            $model = $data->with(['category','user'])->paginate(Request()->per_page <= 30 ? Request()->per_page : 30);
             return new TaskCollection($model);
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -57,7 +57,7 @@ class TaskRepository implements TaskRepositoryInterface
     public function show($id)
     {
         try {
-            $model = $this->model->findOrFail($id);
+            $model = $this->model->with(['category','user'])->findOrFail($id);
             $taskResource = new TaskResource($model);
             return Response::success(data: $taskResource);
         } catch (\Exception $exception) {

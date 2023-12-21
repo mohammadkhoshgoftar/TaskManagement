@@ -29,7 +29,7 @@ class UpdateUserRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email'],
-            'role_id' => ['required', 'boolean','exists:roles,id'],
+            'role_id' => ['required','exists:roles,id'],
         ];
     }
 
@@ -41,12 +41,9 @@ class UpdateUserRequest extends FormRequest
             'firstName.max' => 'تعداد کاراکتر نام حداکثر 255 کاراکتر باشد',
             'lastName.required' => 'نام خانوادگی فیلد اجباری است',
             'lastName.string' => 'نام خانوادگی  باید متن باشد',
-            'lastName.max' => 'تعداد کاراکتر نام حانوادگی حداکثر 255 کاراکتر باشد',
-            'mobile.required' => 'موبایل فیلد اجباری است',
-            'mobile.digits' => 'موبایل باید شامل اعداد باشد',
-            'mobile.max' => 'تعداد ارقام موبایل نامعتبر است',
-            'mobile.min' => 'تعداد ارقام موبایل نامعتبر است',
-            'role.boolean' => 'فیلد نقش باید مقدار 0 یا 1 داشته باشد',
+            'role_id.required' => 'نقش اجباری است',
+            'role_id.exists' => 'نقش وجود ندارد',
+
         ];
     }
 
