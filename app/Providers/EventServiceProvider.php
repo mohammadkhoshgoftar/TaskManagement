@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Modules\Category\Listeners\UpdateCategoryCache;
+use Modules\Category\Events\CategoryDataChanged;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
@@ -18,7 +20,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        CategoryDataChanged::class => [
+            UpdateCategoryCache::class,
+        ],
     ];
+
 
     /**
      * Register any events for your application.

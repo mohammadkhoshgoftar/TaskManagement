@@ -1,5 +1,6 @@
 {
     "Permision": true,
     "Task": true,
-    "Permission": true
+    "Permission": true,
+    "Category": true
 }

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Category\Models\Category;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -43,6 +44,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 
     public function before(User $user, string $ability): bool|null
     {

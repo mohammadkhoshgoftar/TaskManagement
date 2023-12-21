@@ -19,8 +19,8 @@ class AuthController extends Controller
             $response = Http::asForm()->post('http://taskmanagment.me/oauth/token', [
                 'grant_type' => 'password',
                 'client_id' => '2',
-//                'client_secret' => 'nFA7UHo64vjoj7PscvplAX5vLFc9A64DemSHRwGV', postgresql
-                'client_secret' => 'O9nzQKmbnU6dEsajOw1OYF69WxT5mBMWgLZA38vH', // mysql
+                'client_secret' => 'sbIacBm7n7FUioRMC5Cu2WEBvu5xlSFLwcyILTL9', //postgresql
+//                'client_secret' => 'O9nzQKmbnU6dEsajOw1OYF69WxT5mBMWgLZA38vH', // mysql
                 'username' => $data['email'],
                 'password' => $data['password'],
                 'scope' => '',

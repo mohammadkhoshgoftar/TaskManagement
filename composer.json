@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.5",
         "nwidart/laravel-modules": "8.0",
         "predis/predis": "^2.2",
-        "spatie/laravel-permission": "^6.2"
+        "spatie/laravel-permission": "^6.2",
+         "owen-it/laravel-auditing": "^4.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
