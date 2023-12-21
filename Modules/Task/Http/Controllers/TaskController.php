@@ -3,6 +3,7 @@
 namespace Modules\Task\Http\Controllers;
 
 use Illuminate\Http\Response;
+use Modules\Task\Http\Requests\FilterTaskRequest;
 use Modules\Task\Http\Requests\UpdateTaskRequest;
 use Modules\Task\Http\Requests\StoreTaskRequest;
 use Illuminate\Routing\Controller;
@@ -19,9 +20,9 @@ class TaskController extends Controller
         $this->repository = $taskRepository;
     }
 
-    public function index()
+    public function index(FilterTaskRequest $request)
     {
-        return $this->repository->index();
+        return $this->repository->index($request->validated());
     }
 
     public function store(StoreTaskRequest $request)

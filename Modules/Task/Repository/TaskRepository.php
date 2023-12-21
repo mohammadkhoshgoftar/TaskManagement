@@ -17,10 +17,15 @@ class TaskRepository implements TaskRepositoryInterface
         $this->model = new Task();
     }
 
-    public function index()
+    public function index($validatedData)
     {
         try {
-            $model = $this->model->with(['user'])->orderByDesc('id')->paginate(Request()->per_page <= 30 ? Request()->per_page : 30);
+            $orderBy = $validatedData['orderBy'] ?? null;
+            $orderType = $validatedData['orderType'] ?? null;
+            $search = $validatedData['search'] ?? null;
+            $searchBy = $validatedData['searchBy'] ?? null;
+            $data = $this->filter($orderBy, $orderType, $search, $searchBy);
+            $model = $data->paginate(Request()->per_page <= 30 ? Request()->per_page : 30);
             return new TaskCollection($model);
         } catch (\Exception $exception) {
             $message = $exception->getMessage();
@@ -75,5 +80,23 @@ class TaskRepository implements TaskRepositoryInterface
             return false;
         }
 
+    }
+
+    private function filter($orderBy, $orderType, $search, $searchBy)
+    {
+        $model = $this->model;
+        if ($orderBy) {
+            switch ($orderType) {
+                case('asc'):
+                    $model = $model->orderBy($orderBy);
+                    break;
+                case('desc'):
+                    $model = $model->orderByDesc($orderBy);
+            }
+        }
+        if ($searchBy) {
+            $model = $model->where($searchBy,'like','%'.$search.'%');
+        }
+        return $model;
     }
 }
